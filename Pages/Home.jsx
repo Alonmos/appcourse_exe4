@@ -70,30 +70,33 @@ export default function Home(props) {
 
     const renderNotesByCategories = () => {
 
-        let strnotesBycatgs = categories.map((catg, indx) => {
+        if (categories !== undefined) {
 
-            let counter = 0;
+            let strnotesBycatgs = categories.map((catg, indx) => {
 
-            if (notes !== undefined) {
+                let counter = 0;
 
-                notes.map((note) => {
-                    if (note.category == catg)
-                        counter = counter + 1
-                })
+                if (notes !== undefined) {
 
-            }
+                    notes.map((note) => {
+                        if (note.category == catg)
+                            counter = counter + 1
+                    })
+
+                }
 
 
-            return (
-                <View style={styles.allNotesView} key={indx}>
-                    <Text style={{ flex: 0.8, margin: 2, fontSize: 22, color: 'navy', fontWeight: 'bold' }}>{catg} : {counter}</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('Notes', catg)}><Icon name='list' size={30} color="white" backgroundColor='#6495ED' borderRadius={45} style={{ padding: 10 }} /></TouchableOpacity>
-                </View >
-            )
+                return (
+                    <View style={styles.allNotesView} key={indx}>
+                        <Text style={{ flex: 0.8, margin: 2, fontSize: 22, color: 'navy', fontWeight: 'bold' }}>{catg} : {counter}</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Notes', catg)}><Icon name='list' size={30} color="white" backgroundColor='#6495ED' borderRadius={45} style={{ padding: 10 }} /></TouchableOpacity>
+                    </View >
+                )
 
-        });
+            });
 
-        setallNotes(strnotesBycatgs)
+            setallNotes(strnotesBycatgs)
+        }
 
     }
 
@@ -123,7 +126,7 @@ export default function Home(props) {
                         placeholder='Enter Category Name'
                         errorStyle={{ color: 'red' }}
                         marginTop={2} />
-                        {strSuccess}
+                    {strSuccess}
                     <Button onPress={addCategory} title='Add Now!' color='#6495ED' /></View>
             </Dialog>
 
